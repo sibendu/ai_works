@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech to Text</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--page-bg);
+            min-height: 100vh;
+            padding: 0;
+            color: var(--text-color);
+        }
+
+        :root {
+            --page-bg: #f1f3f7;
+            --container-bg: #ffffff;
+            --text-color: #222222;
+            --muted-text: #666666;
+            --panel-bg: #f5f5f5;
+            --panel-border: #d6d6d6;
+            --error-bg: #ffebee;
+            --error-text: #c62828;
+        }
+
+        body.dark-theme {
+            --page-bg: #0f172a;
+            --container-bg: #111827;
+            --text-color: #e5e7eb;
+            --muted-text: #9ca3af;
+            --panel-bg: #1f2937;
+            --panel-border: #374151;
+            --error-bg: #451a1a;
+            --error-text: #fca5a5;
+        }
+
+        .container {
+            background: var(--container-bg);
+            padding: 40px;
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--text-color);
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            padding: 10px 16px;
+            font-size: 0.95em;
+            text-transform: none;
+            letter-spacing: 0.3px;
+            background: #111827;
+            color: #ffffff;
+            border-radius: 8px;
+            z-index: 1000;
+        }
+
+        body.dark-theme .theme-toggle {
+            background: #e5e7eb;
+            color: #111827;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        #startBtn {
+            background: #4CAF50;
+            color: white;
+        }
+
+        #startBtn:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        #startBtn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        #stopBtn {
+            background: #f44336;
+            color: white;
+        }
+
+        #stopBtn:hover {
+            background: #da190b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(244, 67, 54, 0.4);
+        }
+
+        #stopBtn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        #clearBtn {
+            background: #ff9800;
+            color: white;
+        }
+
+        #clearBtn:hover {
+            background: #e68900;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
+        }
+
+        #generateBtn {
+            background: #2196F3;
+            color: white;
+        }
+
+        #generateBtn:hover {
+            background: #1976d2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.4);
+        }
+
+        .status {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            font-weight: 500;
+            min-height: 30px;
+        }
+
+        .status.listening {
+            color: #4CAF50;
+        }
+
+        .status.stopped {
+            color: var(--muted-text);
+        }
+
+        .transcript-box {
+            background: var(--panel-bg);
+            border: 2px solid var(--panel-border);
+            border-radius: 10px;
+            padding: 20px;
+            min-height: 0;
+            overflow-y: auto;
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        .prompt-box {
+            background: var(--panel-bg);
+            border: 2px solid var(--panel-border);
+            border-radius: 10px;
+            padding: 20px;
+            min-height: 0;
+            overflow-y: auto;
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        .content-row {
+            display: flex;
+            gap: 20px;
+            align-items: stretch;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .content-row > * {
+            flex: 1;
+            height: 100%;
+        }
+
+        .transcript-box,
+        .prompt-box {
+            width: 100%;
+            resize: none;
+            font-family: inherit;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 24px 16px;
+            }
+
+            .content-row {
+                flex-direction: column;
+            }
+
+            .content-row > * {
+                min-height: 35vh;
+            }
+
+            .theme-toggle {
+                top: 10px;
+                right: 10px;
+            }
+        }
+
+        .interim {
+            color: #999;
+            font-style: italic;
+        }
+
+        .pulse {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .error {
+            background: var(--error-bg);
+            color: var(--error-text);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button id="themeToggle" class="theme-toggle" type="button">Dark Theme</button>
+        <h1>🎤 Talk Your Prompt</h1>
+        
+        <div id="error" class="error" style="display: none;"></div>
+        
+        <div class="status" id="status">Ready to listen</div>
+        
+        <div class="controls">
+            <button id="startBtn">Start Listening</button>
+            <button id="stopBtn" disabled>Stop</button>
+            <button id="clearBtn">Clear</button>
+            <button id="generateBtn">Generate</button>
+        </div>
+        
+        <div class="content-row">
+            <textarea class="transcript-box" id="transcript" rows="15" placeholder="Your speech will appear here..."></textarea>
+            <textarea class="prompt-box" id="promptOutput" rows="15" placeholder="Prompt generated will be here"></textarea>
+        </div>
+    </div>
+
+    <script>
+        // Azure OpenAI client settings.
+        // Prefer serving these from a backend in production instead of exposing secrets in browser code.
+        const AZURE_OPENAI_ENDPOINT = 'https://your-resource.openai.azure.com/';
+        const AZURE_OPENAI_API_KEY = 'insert-your-key-here';
+        const AZURE_OPENAI_DEPLOYMENT = 'gpt-*';
+        const AZURE_OPENAI_API_VERSION = '2024-12-01-preview';
+
+        const SYSTEM_PROMPT = `You are an expert prompt engineer. You will receive raw voice-to-text input and your job is to:
+
+        1. CLEAN the transcript by:
+        - Removing filler words: "umm", "uh", "hmm", "ah", "err", "like", "you know", "basically", "literally", "actually", "kind of", "sort of", "I mean", "right", "okay so"
+        - Removing false starts and self-corrections
+        - Removing speech disfluencies and repetitions
+        - Fixing obvious transcription errors
+
+        2. STRUCTURE it into a clear, well-engineered LLM prompt by:
+        - Identifying the core task or goal
+        - Adding implied context and background
+        - Specifying output format if inferable
+        - Adding relevant constraints or tone indicators
+        - Using clear, direct language with no fluff
+        - NOT inventing requirements that weren't implied
+
+        Return ONLY the final structured prompt, ready to copy-paste into an LLM. No preamble, no explanation, no meta-commentary.`;
+
+        const USER_PROMPT = (rawTranscript) => `Convert this raw voice transcript into a well-structured LLM prompt:\n\n"${rawTranscript}"`;
+
+
+
+        // Check if browser supports Speech Recognition
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        
+        if (!SpeechRecognition) {
+            document.getElementById('error').textContent = 
+                'Speech Recognition is not supported in your browser. Please use Chrome, Edge, or Safari.';
+            document.getElementById('error').style.display = 'block';
+            document.getElementById('startBtn').disabled = true;
+        } else {
+            const recognition = new SpeechRecognition();
+            const startBtn = document.getElementById('startBtn');
+            const stopBtn = document.getElementById('stopBtn');
+            const clearBtn = document.getElementById('clearBtn');
+            const generateBtn = document.getElementById('generateBtn');
+            const themeToggle = document.getElementById('themeToggle');
+            const transcript = document.getElementById('transcript');
+            const promptOutput = document.getElementById('promptOutput');
+            const status = document.getElementById('status');
+
+            themeToggle.addEventListener('click', () => {
+                const isDark = document.body.classList.toggle('dark-theme');
+                themeToggle.textContent = isDark ? 'Light Theme' : 'Dark Theme';
+            });
+
+            async function cleanPromptWithAzureOpenAI(rawText) {
+                const endpoint = AZURE_OPENAI_ENDPOINT.trim().replace(/\/$/, '');
+                const apiKey = AZURE_OPENAI_API_KEY.trim();
+                const deployment = AZURE_OPENAI_DEPLOYMENT.trim();
+
+                if (
+                    !rawText ||
+                    endpoint.includes('YOUR_RESOURCE_NAME') ||
+                    apiKey.includes('YOUR_AZURE_OPENAI_API_KEY') ||
+                    deployment.includes('YOUR_MODEL_DEPLOYMENT_NAME')
+                ) {
+                    throw new Error('Configure Azure OpenAI endpoint, key, and deployment before generating.');
+                }
+
+                const url = `${endpoint}/openai/deployments/${deployment}/chat/completions?api-version=${AZURE_OPENAI_API_VERSION}`;
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'api-key': apiKey
+                    },
+                    body: JSON.stringify({
+                        messages: [
+                            {
+                                role: 'system',
+                                content: SYSTEM_PROMPT
+                            },
+                            {
+                                role: 'user',
+                                content: USER_PROMPT(rawText)  
+                            }
+                        ],
+                        //max_completion_tokens: 400
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`Azure OpenAI request failed (${response.status}): ${errorText}`);
+                }
+
+                const data = await response.json();
+                const modelOutput = data?.choices?.[0]?.message?.content?.trim();
+
+                if (!modelOutput) {
+                    throw new Error('Azure OpenAI returned an empty response.');
+                }
+
+                return modelOutput;
+            }
+            
+            // Configure recognition
+            recognition.continuous = true;
+            recognition.interimResults = true;
+            recognition.lang = 'en-US'; // Change this for other languages
+            
+            let finalTranscript = '';
+            
+            // Start listening
+            startBtn.addEventListener('click', () => {
+                recognition.start();
+                startBtn.disabled = true;
+                stopBtn.disabled = false;
+                status.textContent = '🎙️ Listening...';
+                status.className = 'status listening pulse';
+            });
+            
+            // Stop listening
+            stopBtn.addEventListener('click', () => {
+                recognition.stop();
+                startBtn.disabled = false;
+                stopBtn.disabled = true;
+                status.textContent = 'Stopped';
+                status.className = 'status stopped';
+            });
+            
+            // Clear transcript
+            clearBtn.addEventListener('click', () => {
+                finalTranscript = '';
+                transcript.value = '';
+                promptOutput.value = '';
+            });
+
+            // Generate a polished prompt from captured speech using Azure OpenAI.
+            generateBtn.addEventListener('click', async () => {
+                const spokenText = finalTranscript.trim() || transcript.value.trim();
+
+                if (!spokenText) {
+                    promptOutput.value = '';
+                    return;
+                }
+
+                try {
+                    generateBtn.disabled = true;
+                    promptOutput.value = 'Generating prompt...';
+                    status.textContent = 'Generating prompt with Azure OpenAI...';
+                    status.className = 'status';
+
+                    const polishedPrompt = await cleanPromptWithAzureOpenAI(spokenText);
+                    promptOutput.value = polishedPrompt;
+                    status.textContent = 'Prompt generated';
+                    status.className = 'status stopped';
+                } catch (error) {
+                    console.error('Generate error:', error);
+                    promptOutput.value = spokenText;
+                    document.getElementById('error').textContent = error.message;
+                    document.getElementById('error').style.display = 'block';
+                    status.textContent = 'Prompt generation failed';
+                    status.className = 'status stopped';
+                } finally {
+                    generateBtn.disabled = false;
+                }
+            });
+            
+            // Handle results
+            recognition.onresult = (event) => {
+                let interimTranscript = '';
+                
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    const transcriptPiece = event.results[i][0].transcript;
+                    
+                    if (event.results[i].isFinal) {
+                        finalTranscript += transcriptPiece + ' ';
+                    } else {
+                        interimTranscript += transcriptPiece;
+                    }
+                }
+                
+                // Display both final and interim results
+                transcript.value = (finalTranscript + interimTranscript).trim();
+                
+                // Auto-scroll to bottom
+                transcript.scrollTop = transcript.scrollHeight;
+            };
+            
+            // Handle errors
+            recognition.onerror = (event) => {
+                console.error('Speech recognition error:', event.error);
+                let errorMessage = 'An error occurred: ' + event.error;
+                
+                if (event.error === 'no-speech') {
+                    errorMessage = 'No speech detected. Please try again.';
+                } else if (event.error === 'not-allowed') {
+                    errorMessage = 'Microphone access denied. Please allow microphone access.';
+                }
+                
+                document.getElementById('error').textContent = errorMessage;
+                document.getElementById('error').style.display = 'block';
+                
+                startBtn.disabled = false;
+                stopBtn.disabled = true;
+                status.textContent = 'Error occurred';
+                status.className = 'status stopped';
+                
+                setTimeout(() => {
+                    document.getElementById('error').style.display = 'none';
+                }, 5000);
+            };
+            
+            // Handle end of recognition
+            recognition.onend = () => {
+                startBtn.disabled = false;
+                stopBtn.disabled = true;
+                if (!status.textContent.includes('Error')) {
+                    status.textContent = 'Ready to listen';
+                    status.className = 'status stopped';
+                }
+            };
+        }
+    </script>
+</body>
+</html>
