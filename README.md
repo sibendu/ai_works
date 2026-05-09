@@ -8,6 +8,7 @@ Miscellaneous AI experiments, reusable prompts, and skill packages.
 Collection of reusable skills for specific workflows.
 
 - `README.md`: Explains what skills are and lists available skill categories.
+- `Claude_Code_Top_Skills.md`: Some most useful skills (use with Claude Code or others) 
 - `manager/performance-management-design/SKILL.md`: Skill definition for generating role-based SMART performance goals and KPIs from category and role inputs.
 - `manager/performance-management-design/references/`: Supporting reference material for the performance-management skill.
 - `manager/performance-management-design/scripts/generate_performance_goals.py`: Python CLI script that reads Excel inputs, calls Claude (Anthropic or Anthropic Foundry), and exports goal/KPI output to Excel.
