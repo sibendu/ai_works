@@ -27,6 +27,14 @@ Each skill lives in its own folder with a `SKILL.md` file.
 | --- | --- |
 | `performance-management-design` | Design goals for your team based on roles and job descriptions |
 
+### Misc (`misc/`)
+
+| Skill | Description |
+| --- | --- |
+| `resume-forge` | Convert a Markdown resume into a professionally formatted PDF with multiple
+  style options and ATS optimization |
+
+
 
 ## Q&A
 

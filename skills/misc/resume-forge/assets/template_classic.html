@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  @page {
+    size: letter;
+    margin: 0.75in 0.85in;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 10.5pt;
+    line-height: 1.4;
+    color: #1a1a1a;
+  }
+
+  .header { text-align: center; margin-bottom: 14pt; }
+  .header h1 {
+    font-size: 20pt;
+    font-weight: 700;
+    margin-bottom: 5pt;
+  }
+  .contact { font-size: 9.5pt; color: #333; }
+  .contact span { margin: 0 5pt; }
+  .contact a { color: #1a1a1a; text-decoration: underline; }
+
+  .section-title {
+    font-size: 11pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1pt;
+    border-bottom: 1pt solid #1a1a1a;
+    padding-bottom: 2pt;
+    margin: 12pt 0 6pt 0;
+  }
+
+  .entry { margin-bottom: 8pt; }
+  .entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .entry-title { font-weight: 700; font-size: 10.5pt; }
+  .entry-org { font-style: italic; }
+  .entry-dates { font-size: 9.5pt; color: #444; }
+  .entry-bullets { padding-left: 18pt; margin-top: 2pt; }
+  .entry-bullets li { margin-bottom: 2pt; font-size: 10pt; }
+
+  .content-text { font-size: 10pt; margin-bottom: 3pt; }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>{{ resume.name }}</h1>
+    <div class="contact">
+      {% if resume.contact.email %}<span>{{ resume.contact.email }}</span>{% endif %}
+      {% if resume.contact.phone %}<span>·</span><span>{{ resume.contact.phone }}</span>{% endif %}
+      {% if resume.contact.location %}<span>·</span><span>{{ resume.contact.location }}</span>{% endif %}
+      {% if resume.contact.links %}{% for link in resume.contact.links %}<span>·</span><span><a href="{{ link }}">{{ link | replace('https://', '') | replace('http://', '') }}</a></span>{% endfor %}{% endif %}
+    </div>
+  </div>
+
+  {% for section in resume.sections %}
+  <div class="section">
+    <div class="section-title">{{ section.title }}</div>
+    {% if section.content %}{% for line in section.content %}<p class="content-text">{{ line }}</p>{% endfor %}{% endif %}
+    {% for entry in section.entries %}
+    <div class="entry">
+      <div class="entry-header">
+        <div><span class="entry-title">{{ entry.title }}</span>{% if entry.organization %}<span class="entry-org"> — {{ entry.organization }}</span>{% endif %}</div>
+        {% if entry.dates %}<span class="entry-dates">{{ entry.dates }}</span>{% endif %}
+      </div>
+      {% if entry.bullets %}<ul class="entry-bullets">{% for bullet in entry.bullets %}<li>{{ bullet }}</li>{% endfor %}</ul>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+</body>
+</html>
