@@ -1,0 +1,99 @@
+The pattern lineage: Why fifty years of design patterns may hold the key to growing the architects AI cannot replace
+
+June 10, 2026
+Over the past few months, I have been working with a colleague on what seems to be an administrative question: designing an upskilling path towards the role of architect.
+
+We identified this role as being critical to our platformisation journey. For a telecoms operator, "platforming" is not just a metaphor. It means bringing together the IT and operator network worlds, separated for decades, to create coherent, programmable, operable platforms. Someone has to oversee this convergence. That somebody is the architect.
+
+Halfway through the sessions, the uncomfortable question landed on the whiteboard: At a moment when AI is compressing most of the career path, what is the ultimate knowledge our future architects should be trained on?
+
+I have been turning that question over since. And I keep coming back to an intuition I want to test with you: the answer may have been sitting on our bookshelves for years.
+
+The role becomes critical exactly when its pipeline breaks
+On one hand, demand for architects is rising. Platforming, cloud-native infrastructure and agentic AI are increasing complexity, shifting it from individual components to the relationships between them. The hard problems are no longer inside the boxes. They exist on the connections. This is the domain of architects by definition.
+
+On the other side, the talent supply chain is quietly being dismantled. The traditional path to architecture ran through years of writing code: you built systems, you broke them, you maintained what you broke, and somewhere along that road you developed an instinct for abstractions, boundaries and trade-offs. That apprenticeship was never designed. It was a by-product of how software got made.
+
+AI is now taking on an increasing share of this groundwork. I made the case a few months ago in "When AI writes the code, architects become everything" that the architect role gains weight precisely as code generation gets commoditised (https://www.linkedin.com/pulse/when-ai-writes-code-architects-become-everything-philippe-ensarguet-sqbfe). I stand by it. However, it raises a follow-up question that nobody is comfortable with: if the entry-level work that forged architects is delegated to machines, where does the next generation come from?
+
+A kind of personal intuition tells me that the answer may already exist, scattered across decades of software history. And, we should need to read it as one continuous story.
+
+Patterns have always been how we transmit judgement, not just solutions
+To explain why I believe the answer lies in our books, I need to revisit what a pattern actually is, because we have collectively reduced the concept to something much poorer than its original meaning (and yes, I include myself in this).
+
+Here is the distinction everything that follows hinges on. A recipe tells you what to do. It never tells you when not to do something, or what you might be sacrificing by doing it. Judgement is precisely that second part: the ability to make decisions under pressure, knowing the cost of each option. This is also the one aspect of the architect's job that AI cannot remove, and the one aspect that those years of writing code have quietly built.
+
+The idea does not come from software at all. It comes from a building architect, Christopher Alexander, who published "A Pattern Language: Towns, Buildings, Construction" in 1977 and "The Timeless Way of Building" in 1979. Alexander spent years asking why some places feel right and others do not, and his answer was that good design decisions recur. They recur because the forces that shape them recur: light, circulation, privacy, scale. 
+
+A pattern, in his definition, is a named, recurring solution to a problem in a context, including the forces in tension and the consequences of resolving them one way or another.
+Read that definition again. It is not a recipe. It is judgement, written down in transmissible form.
+
+Software found Alexander through a now-legendary detour (https://hillside.net/home/history). In August 1993, Kent Beck and Grady Booch invited a small group to a mountain cabin in Colorado to explore how Alexander's ideas could be fused with emerging work on object-oriented design, notably Erich Gamma's doctoral research. That group became the Hillside Group, which still runs the Pattern Languages of Programs conferences today. One year later, Erich Gamma, Richard Helm, Ralph Johnson and John Vlissides published "Design Patterns: Elements of Reusable Object-Oriented Software", the Gang of Four book, and gave our industry its first shared vocabulary of design judgement.
+
+Here is the part we tend to forget. The lasting value of the GoF book was never the twenty-three patterns. Most of us could not list them all today (and I need to admit, it's my case). The lasting value was the format: problem, context, forces, solution, consequences. A pattern names a trade-off and makes it discussable. Before patterns, a senior engineer's judgement lived in their head and left the building with them. After patterns, it could be examined, challenged, taught.
+
+This property is important for answering our question about upskilling. Patterns are not a catalogue of answers. Patterns are the most successful mechanism our industry has ever produced for transferring architectural judgement from one generation to the next without making the next generation relive every failure that produced it.
+
+And it turns out we have been refreshing that mechanism, generation after generation, for many years. That is the family tree I want to walk through now.
+
+There is a family tree, and it is years deep
+Once you start looking for it, the lineage is striking. Every major platform shift in our industry has produced its own pattern corpus, and each one explicitly builds on the previous.
+
+Two years after the Gang of Four, "Pattern-Oriented Software Architecture (POSA)" by Frank Buschmann, Regine Meunier, Hans Rohnert, Peter Sommerlad and Michael Stal extended the concept beyond objects to whole systems. POSA gave us Layers, Broker, Pipes and Filters, architectural patterns describing how parts of a system relate, not how classes collaborate. The unit of reasoning had changed; the format had not.
+
+Then the enterprise wave. Martin Fowler's "Patterns of Enterprise Application Architecture" in 2002 catalogued the judgement needed when software met data and transactions. One year later, Gregor Hohpe and Bobby Woolf published "Enterprise Integration Patterns", doing for distributed messaging what the GoF had done for objects. Look closely at their catalogue: Pipes and Filters sits at its heart, inherited from POSA and reapplied to message flows. Same pattern, new substrate.
+
+Michael Nygard's "Release It!" in 2007 added a branch the previous generations had underweighted: failure. His Circuit Breaker, Bulkhead and Timeout patterns encoded the judgement of people who had been woken at 3am by production systems. And here the genealogy becomes almost literal: fifteen years later, Circuit Breaker is no longer something you read about, it is a configuration field in a service mesh.
+
+The cloud generation industrialised the mechanism itself. Bill Wilder's "Cloud Architecture Patterns" in 2012, then the vendor catalogues, Microsoft's Azure Cloud Design Patterns, the AWS Well-Architected Framework, turned pattern corpora into living, maintained references. Chris Richardson's "Microservices Patterns" in 2018, Cornelia Davis's "Cloud Native Patterns" in 2019 and "Kubernetes Patterns" by Bilgin Ibryam and Roland Huß the same year carried the line into the substrate we now operate on. Sidecar, Ambassador, Saga, Strangler Fig, every one of them traceable to forces named decades earlier: coupling, isolation, state, indirection.
+
+Which brings us to today. The agentic wave is producing its corpus in real time, and the filiation is visible. Anthropic's "Building Effective Agents", published by Erik Schluntz and Barry Zhang in December 2024 (https://www.anthropic.com/engineering/building-effective-agents), argues that the most successful agent implementations rely on simple, composable patterns rather than complex frameworks, and its foundational workflow, prompt chaining, is Pipes and Filters. Andrew Ng's four agentic design patterns, Reflection, Tool Use, Planning, Multi-agent Collaboration, read like a behavioural pattern catalogue for non-deterministic actors (https://www.deeplearning.ai/the-batch/issue-242). The naming has not fully converged yet across the 2025-2026 catalogues, and that is precisely the point: we are watching a new branch of the tree grow, live, exactly as the Hillside generation watched theirs. And the consolidation phase has already begun, right on schedule. A recent framework by Jia Huang and Joey Tianyi Zhou ("A Two-Dimensional Framework for AI Agent Design Patterns: Cognitive Function and Execution Topology", arXiv, 2026) maps the scattered practitioner catalogues onto two axes, what an agent does, and how its execution is structured. If that move feels familiar, it should: the Gang of Four classified their twenty-three patterns along two axes too, purpose and scope, thirty years earlier. Even our way of organising patterns has a lineage.
+
+To me, it looks like a real lineage over the years.
+
+Strip the catalogues away and an archetype remains
+Strip away the syntax and the platform specifics, and you realise we have been resolving the same tensions for multiple years. Only the boundaries have expanded: from memory addresses, to network partitions, to probabilistic reasoning steps. 
+
+We do not just inherit catalogues; we inherit archetypes, meta-patterns that keep changing their clothes but never change their purpose.
+I find six recurring forces underneath them all, tensions, in Alexander's sense, that every design should resolve, and I would genuinely like to know whether your list matches mine:
+
+Coupling and cohesion: every corpus, from GoF's Mediator to microservices' Saga to multi-agent orchestration, is fundamentally about deciding what should know about what. 
+Abstraction boundary: where you draw the line that hides complexity, from GoF's Facade to the cloud's managed services to an agent's tool interface. 
+Failure isolation: Nygard's Bulkhead, Kubernetes' pod boundaries, an agent's permission scope, the same instinct, three substrates. 
+Governance of state: who owns it, who mutates it, who replicates it, the question behind Fowler's enterprise patterns, behind event sourcing, behind agent memory design. 
+Indirection: buying flexibility by inserting a level between intent and execution, Proxy, then Broker, then Service Mesh, then the orchestrator standing between a goal and the agents pursuing it. 
+Feedback loop: Observer becoming event-driven architecture becoming reconciliation loops becoming Ng's Reflection pattern.
+
+Take the fifth one and watch it walk through time, because it makes the case better than any theory. In 1994, you protected a complex object from misuse by placing a Proxy in front of it. In the cloud-native era, we realised the network itself was hostile, so we pulled that exact logic out of the code and into a Sidecar container handling protections. Today, building LLM systems, we place guardrails between the agent and its execution environment to intercept hallucinated destructive actions. Memory pointers, then IP tables, then semantic routing. The technology is different from one generation to the next. However, the underlying principles remain the same.
+
+There is, however, one mutation in the genome... every pattern corpus before 2024 assumed deterministic actors: a component, invoked twice with the same input, behaves the same way twice. Agentic systems break that assumption at the foundation. A pattern corpus for actors that decide at runtime must treat non-determinism as a first-class force, which is why the agentic catalogues are full of evaluators, reflectors and validation gates that earlier generations never needed. Non-determinism looks like to join the six as a seventh force.
+
+And this is the quiet superpower of the senior architect. Once you hold the archetype, learning a new paradigm's catalogue takes very little time. You are not learning from scratch; you are mapping a new tool onto a tension you already know how to resolve.
+
+For next generation of architects, we need to check that we are teaching the grammar and not the catalogues!
+
+Pattern literacy is the resilient skill, and for an Telecom operator, it is the only one that spans both worlds, IT and network
+Now back to the whiteboard where this started.
+
+For a telecoms operator, we truly need IT and network architects for a platforming motion. On top of these two profiles, we also need an end-to-end architect, which is the rarest of the three. This is someone who can reason across both substrates because our platforms and our customers' experiences do not stop at the boundary between them. The usual explanation for this scarcity is that the two areas have different cultures, tools and vocabulary. All true. However, while walking the pattern lineage, I realised that the grammar is already common to both.
+
+Look at the network world through the six forces:
+
+The separation of control plane and user plane is an abstraction boundary and an indirection, the same move as Broker, made on packets instead of objects. 
+Network slicing is failure and performance isolation, Bulkhead, at carrier scale. 
+Intent-based networking is a feedback loop: declare the desired state, let a reconciliation mechanism converge towards it, which is, almost word for word, the Kubernetes operator model. 
+
+The network community rarely uses the pattern vocabulary, and the IT community rarely recognises its own patterns in network architecture. But the forces are identical. An architect fluent in the grammar can cross the boundary; an architect trained on one catalogue cannot.
+
+That observation reshapes the upskilling question entirely. If the durable skill is pattern literacy, the ability to read a system through its forces, to name the trade-offs, to recognise the same pattern wearing different clothes, then it can be taught deliberately.
+
+This is where AI re-enters the story, this time as an ally rather than the villain of section one. If AI takes on the implementation work, the apprenticeship is freed from it. The years our generation spent developing intuition through repetition can be condensed into deliberate judgement-based practice: The AI generates three candidate architectures, and the apprentice's job is to name the forces, weigh the trade-offs and justify a decision. The machine produces options. The human provides judgement. This division of labour does not degrade the architect's path; it may be the first time we can actually design it.
+
+The timeless way of building architects
+Christopher Alexander called his second book "The Timeless Way of Building". He meant that behind every great building lies a way of designing that does not age, even as materials and techniques do. Fifty years of software history suggest the same is true of our discipline: the catalogues age, the way of thinking they encode does not.
+
+So, this is where I stand. At the very moment that its traditional apprenticeship is dissolving, the architect role is becoming the keystone of platforming. I believe that, when read as one continuous story and taught as a grammar rather than a sequence of catalogues, the pattern lineage is the most credible foundation we have for deliberately rebuilding that apprenticeship.
+
+But this is an intuition under construction, and I am publishing it precisely to stress-test it. 
+
+So let me ask you directly. Is your architect pipeline breaking the way ours is? Does your list of invariant forces match mine, and what would you add or strike? And is anyone already teaching the grammar rather than the catalogues, in telco or beyond?

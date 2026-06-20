@@ -1,0 +1,20 @@
+# Job extraction
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+
+# Markdown-to-HTML rendering
+Markdown>=3.5.0
+Jinja2>=3.1.0
+
+# Preferred HTML/CSS PDF renderer.
+# Note: WeasyPrint also requires native OS libraries such as Pango/Cairo/GDK-PixBuf.
+WeasyPrint>=62.0
+
+# Pure-Python fallback PDF renderer
+fpdf2>=2.8.0
+
+# Final PDF review and page rendering
+pdfplumber>=0.11.0
+pdfminer.six>=20231228
+pypdfium2>=4.30.0
+Pillow>=10.0.0

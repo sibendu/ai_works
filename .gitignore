@@ -18,3 +18,4 @@ data_calculated/
 output/
 lambda/
 .env
+*sdas*

@@ -1,0 +1,70 @@
+Architecture: In the Age of AI - What Changed, What Remains
+
+
+October 10, 2025
+Couple of years ago, I wrote about architecture as the realm of uncertainty and abstraction - where we wrestle with fuzzy problems before they crystallize into design patterns. 
+
+
+I believed (and still do) that as our understanding matures, architecture's boundary shifts left, transforming into design. All conditions remaining unchanged, architecture boundary would shrink. But nature saves us from that boredom by being a constant source / force of change. 
+
+With the emergence of AI over the last years, especially Generative capabilities and rapid evolution, something fundamental happened. It not just moved the boundary, but also shattered the frame.
+
+What Remains Constant
+What I find startling and amusing — the fundamental nature of architecture remains unchanged, but everything around it transforms.
+
+Architecture's essence remains constant: grappling with uncertainty, navigating trade-offs, understanding context. The "why" behind decisions, the ability to see second and third-order consequences (or beyond like grandmasters can do) — these are distinctly architectural, distinctly human.
+
+When thinking architecture/design today, I am still traversing the same series of thoughts:
+
+What breaks as this scales?
+What do I need to do for that?
+How much of that must be now, and what can be deferred?
+What coupling points will become troubles?
+What assumptions are we making about data, quality, behaviour, capabilities?
+
+What Has Shifted Dramatically
+There is something that has shifted dramatically - the speed at which we can explore the possibility space.
+
+What once took weeks of prototyping can now be demonstrated in hours. I can generate more design alternatives. Challenge my own assumptions more. Do actual simulations, rather than being restricted to mental ones. Test more options that previously would be discarded as too resource-time-intensive to even explore.
+
+This reduces the chance of being wrong in the architecture-design stage and improves odds for success.
+
+Yet paradoxically, this makes architecture more critical, not less.
+
+When you can generate a thousand solutions, the judgment to identify which ten are worth pursuing becomes invaluable.
+
+When AI can produce working code from well-crafted requirements, understanding which requirements actually matter and which will create technical debt or organizational friction becomes the bottleneck.
+
+The Simultaneous Expansion and Compression
+Architecture's boundary does something I didn't fully fathom before — it's simultaneously expanding and compressing.
+
+It is expanding because AI systems themselves introduce new dimensions of uncertainty: emergent behaviours, interpretability challenges, ethical considerations, data lineage complexities.
+
+But it is also compressing because certain design patterns are being commoditized at unprecedented speed.
+
+Earlier we would be spending days debating service decompositions. Now teams can iterate through options in an afternoon (though practically many teams will take years to be able to do that).
+
+The Irreducible Core
+The truth I am grappling with: much of what we called "architecture" was actually systematic design applying established patterns. The remaining core, the irreducible essence, is more exposed now.
+
+It is the ability to:
+
+Frame the right problem
+Assess that against all dimensions of readiness
+Anticipate unintended consequences
+Make judgment calls with incomplete information
+Know when to accept AI-generated solutions and when to question the premises they are built on
+
+We need to be more conscious about use of the word 'Architecture' 
+I wrote earlier about the overuse of the term 'architecture'. Just as it became shorthand for any design diagram, now we are seeing 'AI architecture' emerge as the latest buzzword, often describing what is essentially integration patterns or prompt engineering.
+
+We are at risk of speed-running the same confusion, just with more impressive-sounding buzzwords.
+
+Finally, The Question That Intrigues 
+What really intrigues me: in this new AI-accelerated world, are we creating architects who have never developed the pattern recognition that comes from slow, deliberate design work?
+
+Can one learn architectural judgment by skipping straight to rapid prototyping? Or is there irreplaceable value in having wrestled with complexity the hard way?
+
+Obviously I do not know the answer to this. It is for the coming years to reveal.
+
+But I am certain that the distinction between architecture and design matters more now. Precisely because the tools make it temptingly easy to conflate them.

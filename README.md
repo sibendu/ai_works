@@ -4,23 +4,24 @@ Miscellaneous AI experiments, reusable prompts, and skill packages.
 
 ## Repository Structure
 
-### skills/
+### ./claude/skills/
+
 Collection of reusable skills for specific workflows.
 
 - `README.md`: Explains what skills are and lists available skill categories.
 - `Claude_Code_Top_Skills.md`: Some most useful skills (use with Claude Code or others) 
-- `manager/performance-management-design/SKILL.md`: Skill definition for generating role-based SMART performance goals and KPIs from category and role inputs.
-- `manager/performance-management-design/references/`: Supporting reference material for the performance-management skill.
-- `manager/performance-management-design/scripts/generate_performance_goals.py`: Python CLI script that reads Excel inputs, calls Claude (Anthropic or Anthropic Foundry), and exports goal/KPI output to Excel.
-- `manager/performance-management-design/scripts/requirements.txt`: Python dependencies for the goal-generation script.
+- `performance-management-design/SKILL.md`: Skill definition for generating role-based SMART performance goals and KPIs from category and role inputs.
+- `resume-forge`:
 
 ### talktoprompt/
+
 Voice-to-prompt utility and notes.
 
 - `README.md`: Describes the browser-based tool that turns spoken input into structured prompts.
 - `talktoprompt.html`: Standalone HTML page for speech-to-prompt formatting (designed for Azure OpenAI by default, but adaptable).
 
 ### useful_prompts/
+
 Prompt templates for common professional tasks.
 
 - `README.md`: High-level folder entry point.

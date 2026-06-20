@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{{ title }}</title>
+<style>
+  @page { size: Letter; margin: 0.4in 0.48in; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    color: #1f2933;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8.8pt;
+    line-height: 1.25;
+  }
+  h1 {
+    margin: 0 0 2pt;
+    color: #0b5c8d;
+    font-size: 19pt;
+    line-height: 1.08;
+    letter-spacing: 0;
+  }
+  h1 + p {
+    margin: 0 0 8pt;
+    color: #334e68;
+    font-size: 8.7pt;
+  }
+  .resume-contact {
+    margin: 0 0 3pt;
+    color: #334e68;
+    font-size: 8.7pt;
+  }
+  .resume-contact-final {
+    margin-bottom: 8pt;
+    padding-bottom: 4pt;
+    border-bottom: 1pt solid #84a9c4;
+  }
+  h2 {
+    margin: 8pt 0 3pt;
+    padding: 2pt 4pt 1.5pt;
+    border-top: 1pt solid #9fb3c8;
+    background: #eef7fb;
+    color: #102a43;
+    font-size: 9pt;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0;
+  }
+  h3 {
+    margin: 5pt 0 1.5pt;
+    color: #243b53;
+    font-size: 8.85pt;
+    line-height: 1.24;
+  }
+  p { margin: 0 0 2.3pt; }
+  ul { margin: 0.5pt 0 3pt 12pt; padding: 0; }
+  li { margin: 0 0 0.8pt; padding-left: 1pt; }
+  strong { color: #102a43; }
+  a { color: #0b5cad; text-decoration: none; }
+</style>
+</head>
+<body>
+{{ body_html | safe }}
+</body>
+</html>

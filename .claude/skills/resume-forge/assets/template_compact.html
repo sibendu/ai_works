@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  @page {
+    size: letter;
+    margin: 0.45in 0.55in;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 9pt;
+    line-height: 1.35;
+    color: #2d2d2d;
+  }
+
+  .header { text-align: center; margin-bottom: 10pt; }
+  .header h1 {
+    font-size: 18pt;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 3pt;
+  }
+  .contact { font-size: 8.5pt; color: #555; }
+  .contact span { margin: 0 4pt; }
+  .contact a { color: #2563eb; text-decoration: none; }
+
+  .section-title {
+    font-size: 9.5pt;
+    font-weight: 700;
+    color: #1a1a2e;
+    text-transform: uppercase;
+    letter-spacing: 1pt;
+    border-bottom: 1pt solid #2563eb;
+    padding-bottom: 2pt;
+    margin: 8pt 0 5pt 0;
+  }
+
+  .entry { margin-bottom: 6pt; }
+  .entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .entry-title { font-weight: 700; font-size: 9.5pt; color: #1a1a2e; }
+  .entry-org { color: #444; font-size: 9pt; }
+  .entry-dates { font-size: 8.5pt; color: #666; }
+  .entry-bullets { padding-left: 14pt; margin-top: 1pt; }
+  .entry-bullets li { margin-bottom: 1pt; font-size: 8.5pt; color: #333; }
+
+  .content-text { font-size: 8.5pt; color: #333; }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>{{ resume.name }}</h1>
+    <div class="contact">
+      {% if resume.contact.email %}<span>{{ resume.contact.email }}</span>{% endif %}
+      {% if resume.contact.phone %}<span>·</span><span>{{ resume.contact.phone }}</span>{% endif %}
+      {% if resume.contact.location %}<span>·</span><span>{{ resume.contact.location }}</span>{% endif %}
+      {% if resume.contact.links %}{% for link in resume.contact.links %}<span>·</span><span><a href="{{ link }}">{{ link | replace('https://', '') | replace('http://', '') }}</a></span>{% endfor %}{% endif %}
+    </div>
+  </div>
+
+  {% for section in resume.sections %}
+  <div class="section">
+    <div class="section-title">{{ section.title }}</div>
+    {% if section.content %}{% for line in section.content %}<p class="content-text">{{ line }}</p>{% endfor %}{% endif %}
+    {% for entry in section.entries %}
+    <div class="entry">
+      <div class="entry-header">
+        <div><span class="entry-title">{{ entry.title }}</span>{% if entry.organization %}<span class="entry-org"> — {{ entry.organization }}</span>{% endif %}</div>
+        {% if entry.dates %}<span class="entry-dates">{{ entry.dates }}</span>{% endif %}
+      </div>
+      {% if entry.bullets %}<ul class="entry-bullets">{% for bullet in entry.bullets %}<li>{{ bullet }}</li>{% endfor %}</ul>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+</body>
+</html>

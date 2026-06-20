@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{{ title }}</title>
+<style>
+  @page { size: Letter; margin: 0.42in 0.5in; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    color: #171717;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 8.95pt;
+    line-height: 1.26;
+  }
+  h1 {
+    margin: 0 0 3pt;
+    text-align: center;
+    color: #243746;
+    font-size: 18.8pt;
+    line-height: 1.12;
+    letter-spacing: 0;
+  }
+  h1 + p {
+    margin: 0 0 9pt;
+    text-align: center;
+    font-size: 8.75pt;
+    color: #45525c;
+  }
+  .resume-contact {
+    margin: 0 0 3pt;
+    text-align: center;
+    font-size: 8.75pt;
+    color: #45525c;
+  }
+  .resume-contact-final {
+    margin-bottom: 9pt;
+    padding-bottom: 4pt;
+    border-bottom: 1pt solid #8a9aa6;
+  }
+  h2 {
+    margin: 9pt 0 3pt;
+    padding: 2pt 4pt 1.5pt;
+    border-bottom: 0.8pt solid #8a9aa6;
+    background: #f3f6f8;
+    color: #243746;
+    font-size: 9.1pt;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0;
+  }
+  h3 {
+    margin: 5pt 0 1.5pt;
+    color: #222;
+    font-size: 8.9pt;
+    line-height: 1.25;
+  }
+  p { margin: 0 0 2.4pt; }
+  ul { margin: 0.5pt 0 3pt 12pt; padding: 0; }
+  li { margin: 0 0 0.8pt; padding-left: 1pt; }
+  strong { font-weight: 700; }
+  a { color: #243746; text-decoration: none; }
+</style>
+</head>
+<body>
+{{ body_html | safe }}
+</body>
+</html>
