@@ -14,8 +14,12 @@ test.py
 *.webm
 *.mp4
 nohup
-data_calculated/
-output/
 lambda/
 .env
 *sdas*
+*resume*
+*job*
+*jd*
+resume/
+output/
+data_calculated/
