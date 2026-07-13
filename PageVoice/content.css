@@ -1,0 +1,122 @@
+#pagevoice-player {
+  all: initial;
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 2147483647; /* max z-index — sits above everything */
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+
+  background: #1a1a2e;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 13px;
+  color: #ffffff;
+
+  cursor: grab;
+  user-select: none;
+}
+
+/* Buttons */
+#pagevoice-player button {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+
+#pagevoice-player button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+#pagevoice-player button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* Play button accent */
+#pv-play:not(:disabled) {
+  background: #4f8ef7;
+}
+
+#pv-play:not(:disabled):hover {
+  background: #6ba3ff;
+}
+
+/* Progress bar */
+#pv-progress-track {
+  width: 90px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+#pv-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: #4f8ef7;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+/* Speed select */
+#pv-speed {
+  all: unset;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  font-size: 11px;
+  padding: 3px 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#pv-speed:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+#pv-speed option {
+  background: #1a1a2e;
+  color: #ffffff;
+}
+
+/* Voice picker */
+#pv-voice-select {
+  all: unset;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  font-size: 11px;
+  padding: 3px 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  max-width: 90px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#pv-voice-select:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+#pv-voice-select option {
+  background: #1a1a2e;
+  color: #ffffff;
+}

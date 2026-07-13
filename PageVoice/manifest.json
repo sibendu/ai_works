@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "PageVoice",
+  "version": "1.0",
+  "description": "Read the main content of any webpage aloud with play, pause, and stop.",
+  "permissions": ["activeTab"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "128": "icons/icon-128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["lib/Readability.js", "content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "128": "icons/icon-128.png"
+  }
+}

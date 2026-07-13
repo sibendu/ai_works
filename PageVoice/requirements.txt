@@ -1,0 +1,16 @@
+# PageVoice — Extension Dependencies
+# This is a browser extension with no package manager (no npm or pip).
+# All dependencies are either bundled or provided natively by the browser.
+
+# ── Bundled JavaScript Library ──────────────────────────────────────────────
+# File: lib/Readability.js
+# Source: https://raw.githubusercontent.com/mozilla/readability/main/Readability.js
+Mozilla-Readability==0.6.0
+
+# ── Native Browser APIs (no install required) ───────────────────────────────
+# Web Speech API (SpeechSynthesis)  — Chrome 33+, Edge 14+
+# Intl.Segmenter                    — Chrome 87+, Edge 87+
+
+# ── Browser Requirements ─────────────────────────────────────────────────────
+# Google Chrome >= 87
+# Microsoft Edge  >= 87
